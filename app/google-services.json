@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1032719939329",
+    "firebase_url": "https://csapplication-b6e5e.firebaseio.com",
+    "project_id": "csapplication-b6e5e",
+    "storage_bucket": "csapplication-b6e5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032719939329:android:ede8ff58d314906c",
+        "android_client_info": {
+          "package_name": "com.example.beiber.csapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032719939329-qnu8uminglff4fr5mfgbpikehj5sg20f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beiber.csapplication",
+            "certificate_hash": "c48cbdc179d85d971322eaa4878495bde83518fb"
+          }
+        },
+        {
+          "client_id": "1032719939329-k97cm4sichf9kq8osisasf3o72u1tu44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATa8Psh0Pmzx3EX8Vd11NOVx7KxiqpAj4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032719939329-k97cm4sichf9kq8osisasf3o72u1tu44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
