@@ -1,8 +1,10 @@
 package com.example.beiber.csapplication;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,9 +36,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
-            //profile activity
             finish();
-            startActivity(new Intent(getApplicationContext(),Profile.class));
+            startActivity(new Intent(getApplicationContext(),ChatActivity.class));
 
         }
 
@@ -51,6 +52,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewSignup.setOnClickListener(this);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage("Are you sure want to exit");
+        builder.setCancelable(true);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 
     private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
@@ -80,9 +103,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            //start the profile activity
-                            finish();
-                            startActivity(new Intent(getApplicationContext(),Profile.class));
+                            finish();//finish and start the profile activity
+                            startActivity(new Intent(getApplicationContext(),ChatActivity.class));
 
                         }
                     }

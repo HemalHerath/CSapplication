@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">H BANK</string>
+    <string name="app_name">GROUP CHAT</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

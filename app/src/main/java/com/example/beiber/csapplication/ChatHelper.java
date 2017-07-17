@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ChatHelper extends ArrayAdapter<ChatMessage> {
     private List<ChatMessage> messageList;
 
     public ChatHelper(Activity context, List<ChatMessage> messageList) {
-        super(context, R.layout.list_layout, messageList);
+        super(context, R.layout.activity_chat, messageList);
         this.context = context;
         this.messageList = messageList;
     }
@@ -35,11 +36,15 @@ public class ChatHelper extends ArrayAdapter<ChatMessage> {
 
         TextView message_user =(TextView) listViwItem.findViewById(R.id.message_user);
         TextView message_text =(TextView) listViwItem.findViewById(R.id.message_text);
+        TextView message_time =(TextView) listViwItem.findViewById(R.id.message_time);
 
         ChatMessage chatMessage = messageList.get(position);
 
         message_user.setText(chatMessage.getMessageUser());
         message_text.setText(chatMessage.getMessageText());
+
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        message_time.setText(currentDateTimeString);
 
         return listViwItem;
     }
