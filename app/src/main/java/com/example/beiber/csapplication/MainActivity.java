@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseReference databaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextAddress = (EditText)findViewById(R.id.editTextAddress);
         editTextTel = (EditText)findViewById(R.id.editTextTel);
 
-        editTextTel.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        editTextTel.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(editTextTel.getText().length()!=10){
-                    editTextTel.setError("Input 10 Integers");
+            public void onFocusChange(View v, boolean hasFocus)
+            {
+                if(editTextTel.getText().length()!=10)
+                {
+                    editTextTel.setError("Not Valid");
                 }
             }
         });
@@ -65,14 +69,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRegister.setOnClickListener(this);
         textViewsignin.setOnClickListener(this);
     }
+    //when back button press give a alert box
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage("Are you sure want to exit");
         builder.setCancelable(true);
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 dialog.cancel();
             }
         });
@@ -86,8 +94,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialog.show();
     }
 
-
-    private void registerUser(){
+    //user register method
+    private void registerUser()
+    {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         final String name = editTextFirstName.getText().toString().trim();
@@ -95,23 +104,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String tel = editTextTel.getText().toString().trim();
 
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(address) || TextUtils.isEmpty(tel) || TextUtils.isEmpty(email)
-                || TextUtils.isEmpty(password)) {
+                || TextUtils.isEmpty(password))
+        {
 
             Toast.makeText(this, "All fields must be filled",Toast.LENGTH_LONG).show();
-        }else {
-
+        }
+        else
+            {
             //validation ok
             progressDialog.setMessage("Please wait . . .");
             progressDialog.show();
 
             firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                    {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if (task.isSuccessful())
+                            {
                                 //user successfully registered and logged in
-
                                 FirebaseUser user = firebaseAuth.getCurrentUser();//get the user
                                 ProUpload proUpload = new ProUpload(name, address, tel, null);
                                 databaseReference.child(user.getUid()).setValue(proUpload);//save information according to the user
@@ -121,28 +133,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), ChatActivity.class));
 
-                            } else {
-                                Toast.makeText(MainActivity.this, "Could Not Register. Please Try Again Later", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
                             }
+                            else
+                                {
+                                    Toast.makeText(MainActivity.this, "Could Not Register. Please Try Again Later",
+                                            Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
                         }
                     });
-        }
-
+            }
     }
-
     @Override
-    public void onClick(View v) {
-
-        if(v == buttonRegister){
+    public void onClick(View v)
+    {
+        if(v == buttonRegister)
+        {
             registerUser();
         }
-
-        if(v == textViewsignin){
+        if(v == textViewsignin)
+        {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
     }
 }
 

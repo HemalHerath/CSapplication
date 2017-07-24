@@ -37,6 +37,7 @@ public class ImageListActivity extends AppCompatActivity {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(ProActivity.DATABASE_PATH);
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();

@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Profile"
     android:padding="16dp"
-    android:id="@+id/drawerLayout">
+    android:id="@+id/drawerLayout"
+    android:background="@drawable/ilm"
+    android:tileMode="disabled">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="6dp"
-        android:layout_marginStart="6dp">
+        android:id="@+id/relativeLayout">
 
         <TextView
             android:id="@+id/textviewUserEmail"
@@ -27,19 +27,55 @@
             android:textAlignment="center"
             android:textSize="24dp"
             android:textStyle="bold"
-            android:layout_below="@+id/ProfileImage"
+            android:layout_below="@+id/ProImg"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="17dp" />
 
         <ImageView
-            android:id="@+id/ProfileImage"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:id="@+id/ProImg"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="19dp"
             android:background="@drawable/picture"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:text="Name"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/textviewUserEmail"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:text="Address"
+            android:layout_below="@+id/nameText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/telText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:text="Tel"
+            android:layout_below="@+id/addressText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp" />
 
 
     </RelativeLayout>

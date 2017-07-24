@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -19,12 +20,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -47,7 +52,7 @@ public class ProActivity extends AppCompatActivity {
     private TextView textviewUserEmail;
 
     public static final String STORAGE_PATH="image/";
-    public static final String DATABASE_PATH="users/profiles";
+    public static final String DATABASE_PATH="users/profiles/";
     public static final int REQUEST_CODE=1;
 
     @Override
@@ -73,6 +78,15 @@ public class ProActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         address = (EditText) findViewById(R.id.address);
         tel = (EditText) findViewById(R.id.tel);
+
+        tel.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(tel.getText().length()!=10){
+                    tel.setError("Not Valid");
+                }
+            }
+        });
     }
 
     public void browse(View v){
@@ -80,6 +94,11 @@ public class ProActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select image"),REQUEST_CODE);
+    }
+
+    public void camera(View v){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,REQUEST_CODE);
     }
 
     @Override
@@ -139,9 +158,6 @@ public class ProActivity extends AppCompatActivity {
 
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         databaseReference.child(user.getUid()).setValue(proUpload);
-
-//                    String uploadId = databaseReference.push().getKey();
-//                    databaseReference.child(uploadId).setValue(proUpload);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

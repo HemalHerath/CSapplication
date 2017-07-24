@@ -8,19 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import java.text.DateFormat;
-import java.util.Date;
+import android.text.format.DateFormat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
-/**
- * Created by BEIBER on 6/27/2017.
- */
-
-public class ChatHelper extends ArrayAdapter<ChatMessage> {
+public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private Activity context;
     private List<ChatMessage> messageList;
 
-    public ChatHelper(Activity context, List<ChatMessage> messageList) {
+    public ChatAdapter(Activity context, List<ChatMessage> messageList) {
         super(context, R.layout.activity_chat, messageList);
         this.context = context;
         this.messageList = messageList;
@@ -37,15 +40,19 @@ public class ChatHelper extends ArrayAdapter<ChatMessage> {
         TextView message_user =(TextView) listViwItem.findViewById(R.id.message_user);
         TextView message_text =(TextView) listViwItem.findViewById(R.id.message_text);
         TextView message_time =(TextView) listViwItem.findViewById(R.id.message_time);
+        TextView letter =(TextView)listViwItem.findViewById(R.id.letter);
 
         ChatMessage chatMessage = messageList.get(position);
 
         message_user.setText(chatMessage.getMessageUser());
         message_text.setText(chatMessage.getMessageText());
+        letter.setText(chatMessage.getMessageUser());
 
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        message_time.setText(currentDateTimeString);
+        message_time.setText(DateFormat.format("dd-MM-yyyy-hh:mm a",chatMessage.getMessageTime()));
 
         return listViwItem;
     }
+
+
+
 }

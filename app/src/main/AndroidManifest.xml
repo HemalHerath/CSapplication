@@ -13,12 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Profile" />
-        <activity android:name=".ImageListActivity"/>
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".ProActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="SIGN UP" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="SIGN IN" />
+        <activity
+            android:name=".Profile"
+            android:label="USER PROFILE" />
+        <activity
+            android:name=".ImageListActivity"
+            android:label="GROUP MEMBERS" />
+        <activity
+            android:name=".ChatActivity"
+            android:label="CHITCHAT" />
+        <activity
+            android:name=".ProActivity"
+            android:label="EDIT PROFILE" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImageListActivity"></activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
