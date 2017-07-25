@@ -20,15 +20,6 @@
             android:name=".LoginActivity"
             android:label="SIGN IN" />
         <activity
-            android:name=".Profile"
-            android:label="USER PROFILE" />
-        <activity
-            android:name=".ImageListActivity"
-            android:label="GROUP MEMBERS" />
-        <activity
-            android:name=".ChatActivity"
-            android:label="CHITCHAT" />
-        <activity
             android:name=".ProActivity"
             android:label="EDIT PROFILE" />
         <activity android:name=".Splash">
@@ -39,8 +30,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:name=".MainTabActivity"
+            android:label="ChitChat Group"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

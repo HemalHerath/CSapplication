@@ -1,9 +1,11 @@
 package com.example.beiber.csapplication;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -15,31 +17,32 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageListActivity extends AppCompatActivity {
+public class Tab1Group extends Fragment{
 
     private DatabaseReference mDatabaseRef;
-    private List<ProUpload>imgList;
+    private List<ProUpload> imgList;
     private ListView lv;
     private ImageListAdapter adapter;
     private ProgressDialog progressDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_image_list, container, false);
 
         imgList = new ArrayList<>();
-        lv = (ListView) findViewById(R.id.listViewImage);
-        progressDialog = new ProgressDialog(this);
+        lv = (ListView) rootView.findViewById(R.id.listViewImage);
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(ProActivity.DATABASE_PATH);
+
+        return rootView;
     }
 
-
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -52,7 +55,7 @@ public class ImageListActivity extends AppCompatActivity {
                     imgList.add(img);
                 }
                 //init adapter
-                adapter = new ImageListAdapter(ImageListActivity.this,R.layout.image_item,imgList);
+                adapter = new ImageListAdapter(getActivity(),R.layout.image_item,imgList);
                 //set adapter for list view
                 lv.setAdapter(adapter);
 

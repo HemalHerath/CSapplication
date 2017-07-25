@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile"
     android:padding="16dp"
     android:id="@+id/drawerLayout"
-    android:background="@drawable/ilm"
-    android:tileMode="disabled">
+    android:tileMode="disabled"
+    android:background="@drawable/back">
 
     <RelativeLayout
         android:layout_width="match_parent"

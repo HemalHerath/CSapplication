@@ -1,8 +1,11 @@
 package com.example.beiber.csapplication;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Profile extends AppCompatActivity{
+public class Tab3Profile extends Fragment{
 
     private TextView textviewUserEmail;
     private ImageView ProImg;
@@ -24,28 +27,29 @@ public class Profile extends AppCompatActivity{
     private DatabaseReference databaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_layout);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.profile_layout, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() == null) {
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(getActivity(), LoginActivity.class));
         }
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        textviewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);
+        textviewUserEmail = (TextView) rootView.findViewById(R.id.textviewUserEmail);
         textviewUserEmail.setText(user.getEmail());
 
-        ProImg = (ImageView) findViewById(R.id.ProImg);
-        nameText = (TextView) findViewById(R.id.nameText);
-        addressText = (TextView) findViewById(R.id.addressText);
-        telText = (TextView) findViewById(R.id.telText);
+        ProImg = (ImageView) rootView.findViewById(R.id.ProImg);
+        nameText = (TextView) rootView.findViewById(R.id.nameText);
+        addressText = (TextView) rootView.findViewById(R.id.addressText);
+        telText = (TextView) rootView.findViewById(R.id.telText);
+
+        return rootView;
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
 
         String uid = (String) firebaseAuth.getCurrentUser().getUid();//setting auth uid to uid variable`
@@ -66,7 +70,7 @@ public class Profile extends AppCompatActivity{
                 telText.setText(Tel);
 
                 String Url = (String)dataSnapshot.child("url").getValue();
-                Glide.with(getApplicationContext()).load(Url).into(ProImg);
+                Glide.with(getActivity()).load(Url).into(ProImg);
 
             }
             @Override
@@ -75,7 +79,5 @@ public class Profile extends AppCompatActivity{
             }
         });
     }
- }
 
-
-
+}

@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+            startActivity(new Intent(getApplicationContext(),MainTabActivity.class));
 
         }
 
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             finish();//finish and start the profile activity
-                            startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+                            startActivity(new Intent(getApplicationContext(),MainTabActivity.class));
 
                         }
                     }

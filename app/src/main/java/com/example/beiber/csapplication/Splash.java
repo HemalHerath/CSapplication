@@ -38,7 +38,7 @@ public class Splash extends Activity
                 iv.startAnimation(an2);
                 iv2.startAnimation(an2);
                 finish();
-                Intent intent = new Intent(getBaseContext() , LoginActivity.class);
+                Intent intent = new Intent(getBaseContext() , MainTabActivity.class);
                 startActivity(intent);
             }
             @Override

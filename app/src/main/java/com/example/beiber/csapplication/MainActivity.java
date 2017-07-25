@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), ChatActivity.class));
+                                startActivity(new Intent(getApplicationContext(), MainTabActivity.class));
 
                             }
                             else
